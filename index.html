@@ -3,46 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>林恩 | Lynn</title>
-    <meta name="description" content="林恩的个人主页 | Lynn's Personal Website">
+    <title>林恩 / Lynn</title>
+    <meta name="description" content="林恩的个人主页 / Lynn's Personal Website">
+    <meta name="keywords" content="林恩,Lynn,个人主页,博客,笔记,学习,思考">
+    
+    <!-- Language and SEO Meta -->
+    <link rel="alternate" hreflang="zh-CN" href="https://lynnclub.github.io/" />
+    <link rel="alternate" hreflang="en" href="https://lynnclub.github.io/?lang=en" />
+    <link rel="alternate" hreflang="x-default" href="https://lynnclub.github.io/" />
+    
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💭</text></svg>">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
+        <!-- Dark Mode Toggle -->
+        <button class="theme-toggle" id="theme-toggle" aria-label="切换主题">
+            <span class="theme-toggle-icon">🌙</span>
+        </button>
+        
+        <!-- Language Toggle -->
+        <button class="language-toggle" id="language-toggle" aria-label="切换语言">
+            <span class="language-toggle-text">EN</span>
+        </button>
+        
         <header class="hero-section">
             <div class="hero-content">
-                <div class="avatar">
-                    <div class="avatar-placeholder">L</div>
-                </div>
-                <h1 class="hero-title">林恩 | Lynn</h1>
-                <p class="hero-description">
-                    爱做梦、也擅长做梦的人，梦境丰富多彩、天马行空，有自由飞翔、也有慌乱逃窜，有人间仙境、也有妖魔鬼怪，有故人依旧、也有恍如隔世......<br><br>
-                    A dreamer who is good at dreaming. Dreams are colorful and whimsical, with free flight and panicked escapes, with earthly fairylands and demons, with old friends and a sense of being in another world...
+                <p class="hero-description multilang-text" lang="zh-CN" 
+                   data-zh="林恩是一个爱做梦、也擅长做梦的人，他的梦境丰富多彩、天马行空，有自由飞翔、也有慌乱逃窜，有人间仙境、也有妖魔鬼怪，有故人依旧、也有恍如隔世..." 
+                   data-en="Lynn is a dreamer who excels at dreaming. His dreams are rich and colorful, full of imagination - with free flight and panicked escapes, earthly fairylands and demons, familiar faces and otherworldly experiences...">
+                    林恩是一个爱做梦、也擅长做梦的人，他的梦境丰富多彩、天马行空，有自由飞翔、也有慌乱逃窜，有人间仙境、也有妖魔鬼怪，有故人依旧、也有恍如隔世...
                 </p>
             </div>
         </header>
 
         <main class="main-content">
-            <section class="notes-section">
-                <div class="notes-link">
-                    <a href="https://lynnclub.github.io/notes/" target="_blank" rel="noopener noreferrer">
-                        <h2>林恩笔记 | Lynn's Notes</h2>
-                        <p>→</p>
+            <section class="cards-section">
+                <div class="card">
+                    <a href="https://lynnclub.github.io/notes/" target="_blank" rel="noopener noreferrer" class="card-main-link">
+                        <div class="card-content">
+                            <h2 class="card-title multilang-text" lang="zh-CN" data-zh="林恩笔记" data-en="Lynn's Notes">
+                                林恩笔记
+                            </h2>
+                            <p class="card-description multilang-text" lang="zh-CN" data-zh="林恩学习与思考的产物" data-en="Lynn's learning and thinking">
+                                林恩学习与思考的产物
+                            </p>
+                            <div class="card-secondary-link-wrapper">
+                                <a href="https://github.com/lynnclub/notes" target="_blank" rel="noopener noreferrer" class="card-secondary-link" onclick="event.stopPropagation();">
+                                    <span class="link-icon">📁</span>
+                                    <span class="link-text multilang-text" lang="zh-CN" data-zh="查看仓库" data-en="View Repository">查看仓库</span>
+                                </a>
+                            </div>
+                        </div>
                     </a>
                 </div>
             </section>
         </main>
 
         <footer class="footer">
-            <p>© <span id="current-year">2025</span> 林恩 | Lynn</p>
+            <p>© <span id="current-year">2025</span> <span class="multilang-text" lang="zh-CN" data-zh="林恩" data-en="Lynn">林恩</span></p>
         </footer>
     </div>
 
     <script>
         // 动态更新年份
         document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // 主题切换功能
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.querySelector('.theme-toggle-icon');
+        const body = document.body;
+        
+        // 检查本地存储的主题设置和系统偏好
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        // 初始化主题 - 默认跟随系统设置
+        let currentTheme;
+        if (savedTheme) {
+            currentTheme = savedTheme;
+        } else {
+            currentTheme = prefersDark ? 'dark' : 'light';
+        }
+        body.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
+        
+        // 主题切换事件
+        themeToggle.addEventListener('click', () => {
+            const current = body.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+        
+        // 更新主题图标
+        function updateThemeIcon(theme) {
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+        
+        // 监听系统主题变化 - 仅在用户未手动设置时跟随
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                const newTheme = e.matches ? 'dark' : 'light';
+                body.setAttribute('data-theme', newTheme);
+                updateThemeIcon(newTheme);
+            }
+        });
+        
+        // 语言切换功能
+        const languageToggle = document.getElementById('language-toggle');
+        const languageToggleText = document.querySelector('.language-toggle-text');
+        
+        // 初始化语言 - 默认中文
+        const savedLanguage = localStorage.getItem('language') || 'zh';
+        setLanguage(savedLanguage);
+        
+        // 语言切换事件
+        languageToggle.addEventListener('click', () => {
+            const currentLang = body.getAttribute('data-lang') || 'zh';
+            const newLang = currentLang === 'zh' ? 'en' : 'zh';
+            setLanguage(newLang);
+            localStorage.setItem('language', newLang);
+        });
+        
+        // 设置语言函数 - SEO友好方式
+        function setLanguage(lang) {
+            body.setAttribute('data-lang', lang);
+            const htmlElement = document.documentElement;
+            const multilangElements = document.querySelectorAll('.multilang-text');
+            
+            // 更新HTML lang属性
+            htmlElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+            
+            // 更新页面标题和描述
+            if (lang === 'zh') {
+                document.title = '林恩 / Lynn';
+                document.querySelector('meta[name="description"]').setAttribute('content', '林恩的个人主页 / Lynn\'s Personal Website');
+                languageToggleText.textContent = 'EN';
+                document.getElementById('theme-toggle').setAttribute('aria-label', '切换主题');
+                document.getElementById('language-toggle').setAttribute('aria-label', '切换语言');
+            } else {
+                document.title = 'Lynn / 林恩';
+                document.querySelector('meta[name="description"]').setAttribute('content', 'Lynn\'s Personal Website / 林恩的个人主页');
+                languageToggleText.textContent = '中文';
+                document.getElementById('theme-toggle').setAttribute('aria-label', 'Toggle theme');
+                document.getElementById('language-toggle').setAttribute('aria-label', 'Toggle language');
+            }
+            
+            // 替换文本内容
+            multilangElements.forEach(element => {
+                const zhText = element.getAttribute('data-zh');
+                const enText = element.getAttribute('data-en');
+                
+                if (zhText && enText) {
+                    // 添加切换动画
+                    element.classList.add('switching');
+                    
+                    setTimeout(() => {
+                        element.textContent = lang === 'zh' ? zhText : enText;
+                        element.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+                        element.classList.remove('switching');
+                    }, 100);
+                }
+            });
+        }
     </script>
 </body>
 </html>
