@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>林恩 | Lynn</title>
+    <meta name="description" content="林恩的个人主页 | Lynn's Personal Website">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💭</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="hero-section">
+            <div class="hero-content">
+                <div class="avatar">
+                    <div class="avatar-placeholder">L</div>
+                </div>
+                <h1 class="hero-title">林恩 | Lynn</h1>
+                <p class="hero-description">
+                    爱做梦、也擅长做梦的人，梦境丰富多彩、天马行空，有自由飞翔、也有慌乱逃窜，有人间仙境、也有妖魔鬼怪，有故人依旧、也有恍如隔世......<br><br>
+                    A dreamer who is good at dreaming. Dreams are colorful and whimsical, with free flight and panicked escapes, with earthly fairylands and demons, with old friends and a sense of being in another world...
+                </p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="notes-section">
+                <div class="notes-link">
+                    <a href="https://lynnclub.github.io/notes/" target="_blank" rel="noopener noreferrer">
+                        <h2>林恩笔记 | Lynn's Notes</h2>
+                        <p>→</p>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© <span id="current-year">2025</span> 林恩 | Lynn</p>
+        </footer>
+    </div>
+
+    <script>
+        // 动态更新年份
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
